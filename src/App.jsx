@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import './App.css'; // Asegúrate de importar tus estilos CSS aquí
+import './App.css'; 
 
 function PokemonInfo() {
     const [searchTerm, setSearchTerm] = useState('');
@@ -21,7 +21,7 @@ function PokemonInfo() {
                     const pokemonData = await pokemonResponse.json();
                     return {
                         name: pokemon.name,
-                        image: pokemonData.sprites.front_default,
+                        image: pokemonData.sprites.other.dream_world.front_default,
                         sound: pokemonData.cries.latest
                     };
                 });
@@ -52,7 +52,7 @@ function PokemonInfo() {
                     const response = await fetch(urlAPI);
                     const result = await response.json();
                     setPokemonName(result.name);
-                    setPokemonImageUrl(result.sprites.front_default);
+                    setPokemonImageUrl(result.sprites.other.dream_world.front_default);
                     setPokemonSound(result.cries.latest); 
                     setError('');
                 } catch (error) {
@@ -72,33 +72,45 @@ function PokemonInfo() {
                 onKeyPress={handleKeyPress}
                 placeholder="Search Pokemon..."
             />
-            <div id="pokemon-info">
+              
                 {loading && <p>Loading...</p>}
                 {error && <p>{error}</p>}
                 {pokemonName && (
                     <>
-                        <h1>{pokemonName}</h1>
+                    <div className='pokemon-info'>
+                        
                         <img src={pokemonImageUrl} alt={pokemonName} />
+                        <p>
+                            <span>{pokemonName}</span>
+                        </p>
+                        
                         <button  className='button-pokemon'   onClick={() => playPokemonSound(pokemonSound)}>
-                            Reproducir Sonido
+                            Play Sound
                         </button>
+                        </div>
                     </>
                 )}
+                
                 <h2>Pokemon List</h2>
-                <div className='card' >
+                <div className='pokemon-container' >
                 <ul>
                     {pokemonList.map((pokemon, index) => (
+                        
                         <li key={index}>
-                            <img src={pokemon.image} alt={pokemon.name} className='pokemon'/>
-                          <h2> {pokemon.name}</h2> 
+                            <div className='pokemon-card'>
+                            <img src={pokemon.image} alt={pokemon.name} className='pokemon-imagen' />
+                            <p className='pokemon-titulo'>
+                          <span > {pokemon.name}</span> 
+                          </p>
                             <button className='button-pokemon'   onClick={() => playPokemonSound(pokemon.sound)}>
-                                Reproducir Sonido
+                            Play Sound
                             </button>
+                            </div>
                         </li>
                     ))}
                 </ul>
                 </div>
-            </div>
+            
         </div>
     );
 }
