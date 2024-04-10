@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import {  } from "./App.css";
+
+import './App.css'; // Asegúrate de importar tus estilos CSS aquí
 
 function PokemonInfo() {
     const [searchTerm, setSearchTerm] = useState('');
     const [pokemonName, setPokemonName] = useState('');
     const [pokemonImageUrl, setPokemonImageUrl] = useState('');
+    const [pokemonSound, setPokemonSound] = useState('');
     const [error, setError] = useState('');
     const [pokemonList, setPokemonList] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -14,13 +16,13 @@ function PokemonInfo() {
             try {
                 const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=150');
                 const data = await response.json();
-                const pokemonPromises = data.results.map
-                (async (pokemon) => {
+                const pokemonPromises = data.results.map(async (pokemon) => {
                     const pokemonResponse = await fetch(pokemon.url);
                     const pokemonData = await pokemonResponse.json();
                     return {
                         name: pokemon.name,
-                        image: pokemonData.sprites.front_default
+                        image: pokemonData.sprites.front_default,
+                        sound: pokemonData.cries.latest
                     };
                 });
                 const pokemonWithImages = await Promise.all(pokemonPromises);
@@ -35,6 +37,11 @@ function PokemonInfo() {
         fetchPokemonList();
     }, []);
 
+    const playPokemonSound = (soundUrl) => {
+        const audio = new Audio(soundUrl);
+        audio.play();
+    };
+
     const handleKeyPress = async (e) => {
         if (e.key === 'Enter') {
             e.preventDefault();
@@ -46,6 +53,7 @@ function PokemonInfo() {
                     const result = await response.json();
                     setPokemonName(result.name);
                     setPokemonImageUrl(result.sprites.front_default);
+                    setPokemonSound(result.cries.latest); 
                     setError('');
                 } catch (error) {
                     setError('Error fetching data. Please try again.');
@@ -55,7 +63,7 @@ function PokemonInfo() {
     };
 
     return (
-        <div>
+        <div  >
             <input
                 id="search__pokemon"
                 type="text"
@@ -71,17 +79,25 @@ function PokemonInfo() {
                     <>
                         <h1>{pokemonName}</h1>
                         <img src={pokemonImageUrl} alt={pokemonName} />
+                        <button  className='button-pokemon'   onClick={() => playPokemonSound(pokemonSound)}>
+                            Reproducir Sonido
+                        </button>
                     </>
                 )}
                 <h2>Pokemon List</h2>
+                <div className='card' >
                 <ul>
                     {pokemonList.map((pokemon, index) => (
                         <li key={index}>
                             <img src={pokemon.image} alt={pokemon.name} className='pokemon'/>
-                            {pokemon.name}
+                          <h2> {pokemon.name}</h2> 
+                            <button className='button-pokemon'   onClick={() => playPokemonSound(pokemon.sound)}>
+                                Reproducir Sonido
+                            </button>
                         </li>
                     ))}
                 </ul>
+                </div>
             </div>
         </div>
     );
