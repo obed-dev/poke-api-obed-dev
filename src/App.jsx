@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-
+import useSound from "use-sound";
+import pokemonSong from "./assets/Pokemon Cancion/Y2meta.app - Pokemon Ruby_Sapphire_Emerald- Littleroot Town (128 kbps).mp3";
 import './App.css'; 
+
 
 function PokemonInfo() {
     const [searchTerm, setSearchTerm] = useState('');
@@ -10,6 +12,9 @@ function PokemonInfo() {
     const [error, setError] = useState('');
     const [pokemonList, setPokemonList] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [playSound ] = useSound(pokemonSong)
+    
+    
 
     useEffect(() => {
         const fetchPokemonList = async () => {
@@ -45,6 +50,8 @@ function PokemonInfo() {
         audio.play();
     };
 
+
+
     const handleKeyPress = async (e) => {
         if (e.key === 'Enter') {
             e.preventDefault();
@@ -66,7 +73,11 @@ function PokemonInfo() {
     };
 
     return (
-        <div  >
+    <div>
+            <div  className='pokedex-image' >
+            <img className='image-poke'   src="https://raw.githubusercontent.com/sleduardo20/pokedex/0671af442dff1d8f7141e49eb83b438885bbc9e9/public/img/logo.svg" alt="pokedex-image" srcset="" />
+            </div>
+        
             <input
                 id="search__pokemon"
                 type="text"
@@ -93,7 +104,11 @@ function PokemonInfo() {
                </div>
                     </>
                 )}
-                
+               <div className='music-player' >
+               <p>Reproduciendo música de fondo...</p>
+              <button onClick={playSound} >Play</button>
+              </div>
+              
                 <h2>Pokemon List</h2>
                 
 
