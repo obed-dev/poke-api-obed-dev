@@ -21,8 +21,11 @@ function PokemonInfo() {
                     const pokemonData = await pokemonResponse.json();
                     return {
                         name: pokemon.name,
-                        image: pokemonData.sprites.other.dream_world.front_default,
-                        sound: pokemonData.cries.latest
+                        image: pokemonData.sprites.other.showdown.front_default,
+                        sound: pokemonData.cries.latest,
+                        
+                        
+
                     };
                 });
                 const pokemonWithImages = await Promise.all(pokemonPromises);
@@ -77,41 +80,46 @@ function PokemonInfo() {
                 {error && <p>{error}</p>}
                 {pokemonName && (
                     <>
-                    <div className='pokemon-info'>
-                        
-                        <img src={pokemonImageUrl} alt={pokemonName} />
-                        <p>
-                            <span>{pokemonName}</span>
-                        </p>
-                        
-                        <button  className='button-pokemon'   onClick={() => playPokemonSound(pokemonSound)}>
-                            Play Sound
-                        </button>
-                        </div>
+                   <div className='pokemon-card'>
+                <div className='pokemon-info'>
+                <img src={pokemonImageUrl} alt={pokemonName} />
+                   <p>
+                  <span>{pokemonName}</span>
+                   </p>
+                  <button className='button-pokemon' onClick={() => playPokemonSound(pokemonSound)}>
+                  Play Sound
+                 </button>
+              </div>
+               </div>
                     </>
                 )}
                 
                 <h2>Pokemon List</h2>
-                <div className='pokemon-container' >
-                <ul>
-                    {pokemonList.map((pokemon, index) => (
-                        
-                        <li key={index}>
-                            <div className='pokemon-card'>
-                            <img src={pokemon.image} alt={pokemon.name} className='pokemon-imagen' />
-                            <p className='pokemon-titulo'>
-                          <span > {pokemon.name}</span> 
-                          </p>
-                            <button className='button-pokemon'   onClick={() => playPokemonSound(pokemon.sound)}>
-                            Play Sound
-                            </button>
-                            </div>
-                        </li>
-                    ))}
-                </ul>
+                
+
+                <div className="pokemon-container container text-center">
+               <div className="row">
+               {pokemonList.map((pokemon, index) => (
+                <div class="col-lg-4 col-md-6 col-sm-12" key={index}>
+                <div className="pokemon-card">
+                    <img src={pokemon.image} alt={pokemon.name} className='pokemon-imagen' />
+                    <p className='pokemon-titulo'>
+                        <span>{pokemon.name}</span>
+                    </p>
+                    <button className='button-pokemon' onClick={() => playPokemonSound(pokemon.sound)}>
+                        Play Sound
+                    </button>
                 </div>
+            </div>
+             ))}
+           </div>
+         </div>
             
         </div>
+
+
+
+
     );
 }
 

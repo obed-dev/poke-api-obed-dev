@@ -99,15 +99,15 @@
   color: #eee;
   font-weight: 600;
   text-transform: capitalize;
-  padding: 6px 8px;
+  padding: 8px 17px;
   border-radius: 10px;
   width: 50%;
   text-align: center;
 }
 .pokemon-imagen {
-  width: 150px;
-  height: 150px;
-  margin: 5px 0;
+  width: 100px;
+  height: 100px;
+  margin: 15px 0;
 }
 
 .pokemon-imagen:hover {
