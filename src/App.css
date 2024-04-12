@@ -7,6 +7,11 @@
 }
 body { 
   background-color: 		#FF6347;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .div { 
@@ -19,19 +24,40 @@ body {
 
 }
 
-
-.pokemon-info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border-radius: 20px;
-  background-color: #2a75bb;
-  padding: 25px 20px;
-  box-shadow: 4px 4px 4px #21212120;
-  cursor: pointer;
-  transition: 0.2s;
-  margin: 20px 20px;
+@media only screen and (min-width: 768px) {
+  .pokemon-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 20px;
+    background-color: #2a75bb;
+    padding: 60px 50px;
+    box-shadow: 4px 4px 4px #21212120;
+    cursor: pointer;
+    transition: 0.2s;
+    margin: 20px 20px;
+  }
+  
 }
+
+
+
+@media only screen and (max-width: 768px) {
+  .pokemon-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 20px;
+    background-color: #2a75bb;
+    padding: 40px 30px;
+    box-shadow: 4px 4px 4px #21212120;
+    cursor: pointer;
+    transition: 0.2s;
+    margin: 20px 20px;
+  }
+  
+}
+
 
 .pokemon-info p { 
   display: flex;
@@ -92,6 +118,20 @@ body {
   transition: 0.2s;
   margin: 20px 20px;
   
+}
+
+#pokemon-card-search { 
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+  
+  padding: 25px 30px;
+  
+  cursor: pointer;
+  transition: 0.2s;
+  margin: 20px 20px;
 }
 
 .pokemon-titulo {

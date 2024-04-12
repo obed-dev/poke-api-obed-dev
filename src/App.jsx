@@ -3,7 +3,6 @@ import useSound from "use-sound";
 import pokemonSong from "./assets/Pokemon Cancion/Y2meta.app - Pokemon Ruby_Sapphire_Emerald- Littleroot Town (128 kbps).mp3";
 import './App.css'; 
 
-
 function PokemonInfo() {
     const [searchTerm, setSearchTerm] = useState('');
     const [pokemonName, setPokemonName] = useState('');
@@ -12,9 +11,8 @@ function PokemonInfo() {
     const [error, setError] = useState('');
     const [pokemonList, setPokemonList] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [playSound ] = useSound(pokemonSong)
-    
-    
+    const [isPlaying, setIsPlaying] = useState(false);
+const [playSound, { stop }] = useSound(pokemonSong, { loop: true });
 
     useEffect(() => {
         const fetchPokemonList = async () => {
@@ -28,9 +26,6 @@ function PokemonInfo() {
                         name: pokemon.name,
                         image: pokemonData.sprites.other.showdown.front_default,
                         sound: pokemonData.cries.latest,
-                        
-                        
-
                     };
                 });
                 const pokemonWithImages = await Promise.all(pokemonPromises);
@@ -46,11 +41,23 @@ function PokemonInfo() {
     }, []);
 
     const playPokemonSound = (soundUrl) => {
+        
         const audio = new Audio(soundUrl);
         audio.play();
     };
 
 
+    const togglePlayPause = () => {
+        if (isPlaying) {
+            stop();
+            setIsPlaying(false);
+            pokemonSong.loop(false);
+        } else {
+            playSound();
+            setIsPlaying(true);
+        }
+    };
+  
 
     const handleKeyPress = async (e) => {
         if (e.key === 'Enter') {
@@ -73,11 +80,11 @@ function PokemonInfo() {
     };
 
     return (
-    <div>
-            <div  className='pokedex-image' >
-            <img className='image-poke'   src="https://raw.githubusercontent.com/sleduardo20/pokedex/0671af442dff1d8f7141e49eb83b438885bbc9e9/public/img/logo.svg" alt="pokedex-image" srcset="" />
+        <div>
+            <div className='pokedex-image'>
+                <img className='image-poke' src="https://raw.githubusercontent.com/sleduardo20/pokedex/0671af442dff1d8f7141e49eb83b438885bbc9e9/public/img/logo.svg" alt="pokedex-image" srcset="" />
             </div>
-        
+
             <input
                 id="search__pokemon"
                 type="text"
@@ -86,55 +93,51 @@ function PokemonInfo() {
                 onKeyPress={handleKeyPress}
                 placeholder="Search Pokemon..."
             />
-              
-                {loading && <p>Loading...</p>}
-                {error && <p>{error}</p>}
-                {pokemonName && (
-                    <>
-                   <div className='pokemon-card'>
-                <div className='pokemon-info'>
-                <img src={pokemonImageUrl} alt={pokemonName} />
-                   <p>
-                  <span>{pokemonName}</span>
-                   </p>
-                  <button className='button-pokemon' onClick={() => playPokemonSound(pokemonSound)}>
-                  Play Sound
-                 </button>
-              </div>
-               </div>
-                    </>
-                )}
-               <div className='music-player' >
-               <p>Reproduciendo música de fondo...</p>
-              <button onClick={playSound} >Play</button>
-              </div>
-              
-                <h2>Pokemon List</h2>
-                
 
-                <div className="pokemon-container container text-center">
-               <div className="row">
-               {pokemonList.map((pokemon, index) => (
-                <div class="col-lg-4 col-md-6 col-sm-12" key={index}>
-                <div className="pokemon-card">
-                    <img src={pokemon.image} alt={pokemon.name} className='pokemon-imagen' />
-                    <p className='pokemon-titulo'>
-                        <span>{pokemon.name}</span>
-                    </p>
-                    <button className='button-pokemon' onClick={() => playPokemonSound(pokemon.sound)}>
-                        Play Sound
-                    </button>
+            {loading && <p>Loading...</p>}
+            {error && <p>{error}</p>}
+            {pokemonName && (
+                <>
+                    <div id='pokemon-card-search'>
+                        <div className='pokemon-info'>
+                            <img src={pokemonImageUrl} alt={pokemonName} />
+                            <p>
+                                <span>{pokemonName}</span>
+                            </p>
+                            <button className='button-pokemon' onClick={() => playPokemonSound(pokemonSound)}>
+                                Play Sound
+                            </button>
+                        </div>
+                    </div>
+                </>
+            )}
+
+            <div className='music-player'>
+                <h2>Playing music in the background...</h2>
+                <button onClick={togglePlayPause}>Play/Pause</button>
+                
+            </div>
+
+            <h2>Pokemon List</h2>
+
+            <div className="pokemon-container container text-center">
+                <div className="row">
+                    {pokemonList.map((pokemon, index) => (
+                        <div class="col-lg-4 col-md-6 col-sm-12" key={index}>
+                            <div className="pokemon-card">
+                                <img src={pokemon.image} alt={pokemon.name} className='pokemon-imagen' />
+                                <p className='pokemon-titulo'>
+                                    <span>{pokemon.name}</span>
+                                </p>
+                                <button className='button-pokemon' onClick={() => playPokemonSound(pokemon.sound)}>
+                                    Play Sound
+                                </button>
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </div>
-             ))}
-           </div>
-         </div>
-            
         </div>
-
-
-
-
     );
 }
 
