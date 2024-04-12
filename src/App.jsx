@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import useSound from "use-sound";
 import pokemonSong from "./assets/Pokemon Cancion/Y2meta.app - Pokemon Ruby_Sapphire_Emerald- Littleroot Town (128 kbps).mp3";
+import image1 from "./assets/images/Playing-music-in-the-bakcgroun-12-4-2024 (1).png";
 import './App.css'; 
 
 function PokemonInfo() {
@@ -73,7 +74,14 @@ const [playSound, { stop }] = useSound(pokemonSong, { loop: true });
                     setPokemonSound(result.cries.latest); 
                     setError('');
                 } catch (error) {
-                    setError('Error fetching data. Please try again.');
+                    setError( Swal.fire({
+                        title: "Now you got Psyduck confused",
+                        text: "Please try again with a correct pokemon name!",
+                        imageUrl: "https://lovescienceandnat20s.files.wordpress.com/2017/07/confused-pokemon.gif?w=676",
+                        imageWidth: 400,
+                        imageHeight: 200,
+                        imageAlt: "Psyduck confused means error"
+                      })  );
                 }
             }
         }
@@ -113,7 +121,7 @@ const [playSound, { stop }] = useSound(pokemonSong, { loop: true });
             )}
 
             <div className='music-player'>
-                <h2>Playing music in the background...</h2>
+                <img src={image1} alt="" className='text-pokemon' />
                 <button onClick={togglePlayPause}>Play/Pause</button>
                 
             </div>
