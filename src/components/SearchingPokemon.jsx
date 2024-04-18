@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
 
+
 function BuscarPokemon() {
     const [searchTerm, setSearchTerm] = useState('');
     const [pokemonName, setPokemonName] = useState('');
@@ -10,6 +11,8 @@ function BuscarPokemon() {
     const [pokemonSound, setPokemonSound] = useState('');
     const [error, setError] = useState('');
     const [showModal, setShowModal] = useState(false);
+    const [pokemonId , setPokemonId  ] = useState('');
+    
 
     const handleKeyPress = async (e) => {
         if (e.key === 'Enter') {
@@ -20,6 +23,7 @@ function BuscarPokemon() {
                     const urlAPI = `https://pokeapi.co/api/v2/pokemon/${trimmedSearchTerm}`;
                     const response = await fetch(urlAPI);
                     const result = await response.json();
+                    setPokemonId(result.id);
                     setPokemonName(result.name);
                     setPokemonType(result.types[0].type.name)
                     setPokemonImageUrl(result.sprites.other.dream_world.front_default);
@@ -35,6 +39,7 @@ function BuscarPokemon() {
                         imageHeight: 200,
                         imageAlt: "Psyduck confused means error"
                       }));
+                      
                 }
             }
         }
@@ -45,6 +50,9 @@ function BuscarPokemon() {
         audio.volume = 0.2;
         audio.play();
     };
+
+ 
+
 
     return (
         <div>
@@ -70,8 +78,9 @@ function BuscarPokemon() {
                 <Modal.Body>
                     <div id='pokemon-card-search'>
                     <img src={pokemonImageUrl} alt={pokemonName}  />
+                    <h2>{pokemonId}</h2>
                     <h3>Type: {pokemonType}</h3>
-                    
+                   
                     <button className='button-pokemon' onClick={() => playPokemonSound(pokemonSound)}>Play Sound</button>
                     </div>
                 </Modal.Body>

@@ -13,7 +13,7 @@ function PokemonInfo() {
     const [pokemonList, setPokemonList] = useState([]);
     const [loading, setLoading] = useState(true);
     const [isPlaying, setIsPlaying] = useState(false);
-const [playSound, { stop }] = useSound(pokemonSong, { loop: true });
+    const [playSound, { stop }] = useSound(pokemonSong, { loop: true });
 
     useEffect(() => {
         const fetchPokemonList = async () => {
@@ -24,6 +24,7 @@ const [playSound, { stop }] = useSound(pokemonSong, { loop: true });
                     const pokemonResponse = await fetch(pokemon.url);
                     const pokemonData = await pokemonResponse.json();
                     return {
+                        id : pokemonData.id,
                         name: pokemon.name,
                         class: pokemonData.types[0].type.name,
                         image: pokemonData.sprites.other.showdown.front_default,
@@ -75,7 +76,7 @@ const [playSound, { stop }] = useSound(pokemonSong, { loop: true });
                 <button onClick={togglePlayPause}>Play/Pause</button>
                 
             </div>
-
+            
             <h2>Pokemon List</h2>
 
             <div className="pokemon-container container text-center">
@@ -84,10 +85,12 @@ const [playSound, { stop }] = useSound(pokemonSong, { loop: true });
                         <div class="col-lg-4 col-md-6 col-sm-12" id='hover__pokemon' key={index}>
                             <div className="pokemon-card">
                                 <img src={pokemon.image} alt={pokemon.name} className='pokemon-imagen' />
+                                
                                 <p className='pokemon-titulo'>
+                                    
                                     <span>{pokemon.name}</span>
                                      </p>
-                                     <h3 >{pokemon.class}</h3>
+                                     <h3 >  {pokemon.id} -  {pokemon.class}</h3>
                                 <button className='button-pokemon' onClick={() => playPokemonSound(pokemon.sound)}>
                                     Play Sound
                                 </button>
