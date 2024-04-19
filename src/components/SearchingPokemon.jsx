@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
+import PokemonInfo from '../App';
 
 
 
@@ -9,7 +10,7 @@ function BuscarPokemon() {
     const [pokemonType, setPokemonType] = useState('');
     const [pokemonImageUrl, setPokemonImageUrl] = useState('');
     const [pokemonSound, setPokemonSound] = useState('');
-    const [error, setError] = useState('');
+    const [error, setError] = useState();
     const [showModal, setShowModal] = useState(false);
     const [pokemonId , setPokemonId  ] = useState('');
     
@@ -69,7 +70,7 @@ function BuscarPokemon() {
                 placeholder="Search Pokemon..."
             />
 
-            {error && <p>{error}</p>}
+            {   (error != searchTerm ) && < fetchPokemonList/>}
 
             <Modal show={showModal} onHide={() => setShowModal(false)}>
                 <Modal.Header closeButton>
