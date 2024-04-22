@@ -4,6 +4,7 @@ import pokemonSong from "./assets/Pokemon Cancion/Y2meta.app - Pokemon Ruby_Sapp
 import image1 from "./assets/images/Playing-music-in-the-bakcgroun-12-4-2024 (1).png";
 import BuscarPokemon from "./components/SearchingPokemon";
 import ScrollUp from "./components/ScrollUp";
+import Pokedex from "./components/LoadMorePokemons";
 
 import './App.css'; 
 
@@ -18,7 +19,7 @@ function PokemonInfo() {
     useEffect(() => {
         const fetchPokemonList = async () => {
             try {
-                const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=150');
+                const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=9');
                 const data = await response.json();
                 const pokemonPromises = data.results.map(async (pokemon) => {
                     const pokemonResponse = await fetch(pokemon.url);
@@ -99,7 +100,7 @@ function PokemonInfo() {
                     ))}
                 </div>
             </div>
-
+             < Pokedex/>
             <ScrollUp />
         </div>
     );
