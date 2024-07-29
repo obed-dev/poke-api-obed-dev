@@ -346,7 +346,7 @@ h3 {
   }
   
   body::-webkit-scrollbar-track {
-    background: #2a75bb;        /* color of the tracking area */
+    background: tomato;        /* color of the tracking area */
   }
   
   body::-webkit-scrollbar-thumb {
