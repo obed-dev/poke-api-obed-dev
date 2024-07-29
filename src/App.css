@@ -166,9 +166,7 @@ h3 {
   transition: translateY(2);
 }
 
-.pokemon-card h3 { 
 
-}
 
 
 
@@ -341,4 +339,18 @@ h3 {
     
 
 
+  }
+
+  body::-webkit-scrollbar {
+    width: 12px;               /* width of the entire scrollbar */
+  }
+  
+  body::-webkit-scrollbar-track {
+    background: #2a75bb;        /* color of the tracking area */
+  }
+  
+  body::-webkit-scrollbar-thumb {
+    background-color: #FFDE00;    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    border: 3px solid #454A54;  /* creates padding around scroll thumb */
   }
