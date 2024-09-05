@@ -1,14 +1,14 @@
-PokeAPI App
+PokeAPI App💻👨‍💻
 Description
 This is a web project that consumes the PokeAPI, a public Pokémon API, to display information about different Pokémon. The application allows users to search for and obtain details such as name, image, stats, Pokémon type, and more.
 
 The main goal of this project is to offer an interactive and attractive interface where Pokémon fans can easily explore their favorite information.
 
-Features
+Features👨‍💻
 Pokémon search: Users can search for any Pokémon by its name or number.
 Detailed information: Each Pokémon is displayed with its image, basic stats, types, and more.
 Interactive interface: Responsive and attractive design ensures a smooth experience across different devices.
-Technologies Used
+Technologies Used💻👨‍💻
 HTML5: Base structure of the application.
 CSS3: Used for the site's styling, including a responsive design that adapts to different screens.
 JavaScript (ES6+): Used to manipulate the DOM, make API requests, and manage the application logic.
@@ -20,7 +20,7 @@ Usage
 Clone the repository:
 bash
 Copy 
-git clone https://github.com/your-username/pokeapi-app.git
+git clone https://github.com/obed-dev/poke-api-obed-dev.git
 Navigate to the project directory:
 bash
 Copy
@@ -39,11 +39,18 @@ Deployment
 The application is live and can be accessed through the following link:
 Visit the application 
 
-Screenshots
+Screenshots💻👨‍💻
+Desktop View
+![desktop view poke api ](https://github.com/user-attachments/assets/348886a5-551a-408e-b501-cdb4a83bf2b1)
+
+Mobile View
+![mobile view poke api obed-dev](https://github.com/user-attachments/assets/7af2715c-ef13-4933-be6b-1810ef3c946e)
 
 
 
-Future Improvements
+
+
+Future Improvements💻👨‍💻
 Improve pagination to search for more Pokémon.
 Implement a favorites system for users to save their favorite Pokémon.
 Add more filters and advanced search options.
