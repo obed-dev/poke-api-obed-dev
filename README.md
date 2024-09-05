@@ -20,6 +20,7 @@ Interactive interface: Responsive and attractive design ensures a smooth experie
 
 
 Technologies Used💻👨‍💻
+
 HTML5: Base structure of the application.
 
 CSS3: Used for the site's styling, including a responsive design that adapts to different screens.
