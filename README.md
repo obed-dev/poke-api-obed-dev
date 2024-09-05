@@ -12,8 +12,12 @@ The main goal of this project is to offer an interactive and attractive interfac
 Features👨‍💻
 
 Pokémon search: Users can search for any Pokémon by its name or number.
+
 Detailed information: Each Pokémon is displayed with its image, basic stats, types, and more.
+
 Interactive interface: Responsive and attractive design ensures a smooth experience across different devices.
+
+
 
 
 Technologies Used💻👨‍💻
@@ -31,6 +35,8 @@ React: JavaScript library for building dynamic user interfaces and reusable comp
 PokeAPI: Public Pokémon API used to retrieve Pokémon data.
 
 Netlify: The application is deployed using Netlify, ensuring fast and reliable hosting.
+
+
 
 Usage
 
@@ -61,6 +67,8 @@ The application will be available at http://localhost:3000.
 
 Deployment
 The application is live and can be accessed through the following link:
+
+
 
 Visit the application 
 
