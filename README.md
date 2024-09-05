@@ -2,20 +2,17 @@ PokeAPI App💻👨‍💻
 
 
 Description
+
 This is a web project that consumes the PokeAPI, a public Pokémon API, to display information about different Pokémon. 
-
-
 The application allows users to search for and obtain details such as name, image, stats, Pokémon type, and more.
-
 The main goal of this project is to offer an interactive and attractive interface where Pokémon fans can easily explore their favorite information.
+
 
 
 Features👨‍💻
 
 Pokémon search: Users can search for any Pokémon by its name or number.
-
 Detailed information: Each Pokémon is displayed with its image, basic stats, types, and more.
-
 Interactive interface: Responsive and attractive design ensures a smooth experience across different devices.
 
 
