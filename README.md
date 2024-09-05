@@ -69,8 +69,6 @@ npm start
 The application will be available at http://localhost:3000.
 
 
-Deployment
-The application is live and can be accessed through the following link:
 
 
 
