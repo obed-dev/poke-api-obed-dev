@@ -70,7 +70,7 @@ The application is live and can be accessed through the following link:
 
 
 
-Visit the application 
+
 
 Screenshots💻👨‍💻
 
