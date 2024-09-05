@@ -20,7 +20,9 @@ Interactive interface: Responsive and attractive design ensures a smooth experie
 
 
 
-Technologies Used💻👨‍💻
+
+💻👨‍💻
+Technologies Used
 
 HTML5: Base structure of the application.
 
@@ -38,6 +40,8 @@ Netlify: The application is deployed using Netlify, ensuring fast and reliable h
 
 
 
+
+💻👨‍💻
 Usage
 
 Clone the repository:
@@ -67,6 +71,8 @@ The application will be available at http://localhost:3000.
 
 Deployment
 The application is live and can be accessed through the following link:
+
+
 
 
 
