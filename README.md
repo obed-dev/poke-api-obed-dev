@@ -23,7 +23,11 @@ Netlify: The application is deployed using Netlify, ensuring fast and reliable h
 
 
 
-Usage Clone the repository: bash Copy git clone https://github.com/obed-dev/poke-api-obed-dev.git Navigate to the project directory: bash Copy cd pokeapi-app Install the dependencies: bash Copy npm install Run the application locally: bash Copy npm start The application will be available at http://localhost:3000.
+Usage Clone the repository: bash Copy git clone https://github.com/obed-dev/poke-api-obed-dev.git 
+Navigate to the project directory: 
+bash Copy cd pokeapi-app 
+Install the dependencies: bash Copy npm install 
+Run the application locally: bash Copy npm start The application will be available at http://localhost:3000.
 
 Deployment The application is live and can be accessed through the following link: Visit the application
 
