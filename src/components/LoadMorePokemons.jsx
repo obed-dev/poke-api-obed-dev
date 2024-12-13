@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const Pokedex = () => {
+export const Pokedex = () => {
   const [pokemonList, setPokemonList] = useState([]);
   const [offset, setOffset] = useState(9);
-
+  const [volume , setVolume ] = useState(50);
+  const navigate = useNavigate();
 
 
   const fetchPokemon = async () => {
@@ -32,10 +34,14 @@ const Pokedex = () => {
   const playPokemonSound = (soundUrl) => {
        
     const audio = new Audio(soundUrl);
-    audio.volume = 0.2;
+    audio.volume = volume / 100;
     audio.play();
 };
- 
+
+const handleViewDetails = (pokemonName) => {
+  navigate(`/pokemon/${pokemonName}`);
+};
+
 
 
   const handleLoadMore = () => {
@@ -54,7 +60,8 @@ const Pokedex = () => {
                     
                     <p className='pokemon-titulo'>
                         
-                        <span>{pokemon.name}</span>
+                        <span  onClick={() => handleViewDetails(pokemon.name)} // Redirige al hacer clic en la tarjeta
+                         style={{ cursor: 'pointer' }}>{pokemon.name}</span>
                          </p>
                          <h3 >  {pokemon.id} -  {pokemon.class}</h3>
                     <button className='button-pokemon' onClick={() => playPokemonSound(pokemon.sound)}>
@@ -71,4 +78,3 @@ const Pokedex = () => {
   );
 };
 
-export default Pokedex;

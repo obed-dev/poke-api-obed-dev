@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 
 
-function ScrollToTopButton() {
+export const ScrollToTopButton = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   const scrollToTop = () => {
@@ -28,4 +28,3 @@ function ScrollToTopButton() {
   );
 }
 
-export default ScrollToTopButton;
