@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect , useRef  } from 'react';
 import { AudioControls } from './AudioControls';
 import image1 from "../assets/images/Playing-music-in-the-bakcgroun-12-4-2024 (1).png";
 import { BuscarPokemon } from "./SearchingPokemon";
 import { ScrollToTopButton } from "./ScrollUp";
 import { Pokedex } from "./LoadMorePokemons";
 import { usePokemon } from "./PokemonProvider";
+import { useNavigate, useLocation  } from 'react-router-dom';
 import '../App.css'; 
 
 
@@ -16,10 +17,14 @@ export const PokemonInfo = ({ onPokemonClick }) => {
     const [pokemonList, setPokemonList] = useState([]);
     const [loading, setLoading] = useState(true);
     const { openPokemonDetails } = usePokemon(); 
-    
+    const [scrollPosition, setScrollPosition] = useState(0);
+    const navigate = useNavigate();
+    const location = useLocation();
+
+
     const fetchPokemon = async () => {
         try {
-            const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=9');
+            const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=150');
             const data = await response.json();
             const pokemonPromises = data.results.map(async (pokemon) => {
                 const pokemonResponse = await fetch(pokemon.url);
@@ -50,13 +55,19 @@ export const PokemonInfo = ({ onPokemonClick }) => {
     };
 
        
-  
+   
 
+    const handlePokemonClick = (pokemonName) => {
+        setScrollPosition(window.scrollY); // Guardar la posición actual
+        navigate(`/pokemon/${pokemonName}`, { state: { from: location.pathname, scrollY: window.scrollY } });
+      };
     
-     useEffect(() => { 
+      useEffect(() => {
         fetchPokemon();
-
-     },[])
+        if (location.state && location.state.scrollY) {
+          window.scrollTo(0, location.state.scrollY); // Restaurar el scroll al regresar
+        }
+      }, [location.state]);
 
     
 
@@ -83,7 +94,7 @@ export const PokemonInfo = ({ onPokemonClick }) => {
                                 
                                 <p className='pokemon-titulo'>
                                     
-                                    <span  onClick={() => onPokemonClick(pokemon.name)}>{pokemon.name}</span>
+                                    <span  onClick={() => handlePokemonClick(pokemon.name)}>{pokemon.name}</span>
                                      </p>
                                      <h3 >  {pokemon.id} -  {pokemon.class}</h3>
                                 <button className='button-pokemon' onClick={() => playPokemonSound(pokemon.sound) }>

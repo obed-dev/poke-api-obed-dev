@@ -1,6 +1,6 @@
 // src/App.jsx
 import React from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import {  BrowserRouter as Router, Routes, Route , useNavigate} from 'react-router-dom';
 import { PokemonInfo } from './components/PokemonInfo';
 import { usePokemon } from './components/PokemonProvider';
 import { PokemonDetails }from './components/PokemonDetails';
@@ -15,6 +15,7 @@ export const AppRouter = () => {
   };
 
   return (
+  
     <Routes>
       <Route
         path="/"
@@ -25,6 +26,7 @@ export const AppRouter = () => {
         element={<PokemonDetails />}
       />
     </Routes>
+    
   );
 }
 

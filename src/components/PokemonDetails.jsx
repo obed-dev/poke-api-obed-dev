@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import "../PokemonDetail.css";
 
 export const PokemonDetails = () => {
@@ -8,6 +8,8 @@ export const PokemonDetails = () => {
   const [pokemonData, setPokemonData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const location = useLocation();
+
 
   // Función para cargar datos
   const fetchPokemonData = async () => {
@@ -37,7 +39,22 @@ export const PokemonDetails = () => {
 
   return (
     <div className="pokemon-details">
+       
   <div className="pokemon-image-container">
+  {/* <button
+        onClick={() => navigate(-1)} // Vuelve a la página anterior
+        style={{
+          background: '#3498db',
+          color: 'white',
+          padding: '10px 20px',
+          border: 'none',
+          borderRadius: '5px',
+          cursor: 'pointer',
+          top: '50px',
+        }}
+      >
+        Back
+      </button> */}
     <h2 className="pokemon-name">{pokemonData.name.toUpperCase()}</h2>
     <img
       src={pokemonData.sprites.other['official-artwork'].front_default}

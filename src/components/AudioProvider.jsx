@@ -6,7 +6,7 @@ const AudioContext = createContext();
 export const AudioProvider = ({ children }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(0.5);
-  const audioRef = useRef(new Audio('../src/assets/Pokemon Cancion/Y2meta.app - Pokemon Ruby_Sapphire_Emerald- Littleroot Town (128 kbps).mp3'));
+  const audioRef = useRef(new Audio('/Pokemon Cancion/Y2meta.app - Pokemon Ruby_Sapphire_Emerald- Littleroot Town (128 kbps).mp3'));
 
   const togglePlay = () => {
     if (isPlaying) {

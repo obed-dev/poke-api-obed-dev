@@ -1,16 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export const Pokedex = () => {
   const [pokemonList, setPokemonList] = useState([]);
-  const [offset, setOffset] = useState(9);
+  const [offset, setOffset] = useState(150);
   const [volume , setVolume ] = useState(50);
   const navigate = useNavigate();
+  
+
+
+
+ 
 
 
   const fetchPokemon = async () => {
     try {
-      const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=9&offset=${offset}`);
+      const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=150&offset=${offset}`);
       const data = await response.json();
       
       const pokemonPromises = data.results.map(async (pokemon) => {
@@ -26,7 +31,7 @@ export const Pokedex = () => {
       });
       
       const newPokemonList = await Promise.all(pokemonPromises);
-      setPokemonList(prevList => [...prevList, ...newPokemonList]);
+      setPokemonList(prevList => [...prevList, ...newPokemonList].sort((a, b) => a.id - b.id));
     } catch (error) {
       console.error('Error fetching pokémon data:', error);
     }
@@ -39,15 +44,26 @@ export const Pokedex = () => {
 };
 
 const handleViewDetails = (pokemonName) => {
-  navigate(`/pokemon/${pokemonName}`);
+localStorage.setItem('scrollPosition', window.scrollY); // Guardar posición
+navigate(`/pokemon/${pokemonName}`);
 };
+
+   
 
 
 
   const handleLoadMore = () => {
-    setOffset(prevOffset => prevOffset + 9);
+    setOffset(prevOffset => prevOffset + 150);
     fetchPokemon();
   };
+
+  useEffect(() => {
+  
+      const savedScrollPosition = localStorage.getItem('scrollPosition');
+      if (savedScrollPosition) {
+      window.scrollTo(0, parseInt(savedScrollPosition));
+    }
+  }, []);
 
   return (
    
