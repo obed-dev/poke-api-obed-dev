@@ -1,4 +1,4 @@
-import React, { useState, useEffect , useRef  } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AudioControls } from './AudioControls';
 import image1 from "../assets/images/Playing-music-in-the-bakcgroun-12-4-2024 (1).png";
 import { BuscarPokemon } from "./SearchingPokemon";
@@ -7,14 +7,16 @@ import { Pokedex } from "./LoadMorePokemons";
 import { usePokemon } from "./PokemonProvider";
 import { useNavigate, useLocation  } from 'react-router-dom';
 import '../App.css'; 
+import { Navbar } from './Navbar';
 
 
 
 
-export const PokemonInfo = ({ onPokemonClick }) => {
+export const PokemonInfo = () => {
    
     const [error, setError] = useState('');
     const [pokemonList, setPokemonList] = useState([]);
+    const [filteredPokemons, setFilteredPokemons] = useState([]);
     const [loading, setLoading] = useState(true);
     const { openPokemonDetails } = usePokemon(); 
     const [scrollPosition, setScrollPosition] = useState(0);
@@ -39,6 +41,7 @@ export const PokemonInfo = ({ onPokemonClick }) => {
             });
             const pokemonWithImages = await Promise.all(pokemonPromises);
             setPokemonList(pokemonWithImages);
+            setFilteredPokemons(pokemonWithImages);
             setLoading(false);
         } catch (error) {
             setError('Error fetching data. Please refresh the app.');
@@ -54,7 +57,23 @@ export const PokemonInfo = ({ onPokemonClick }) => {
         audio.play();
     };
 
-       
+
+    //filtered pokemons
+    const filterByType = async (type) => {
+        setLoading(true);
+        try {
+            const response = await fetch(`https://pokeapi.co/api/v2/type/${type}`);
+            const data = await response.json();
+            const filtered = pokemonList.filter((pokemon) =>
+                data.pokemon.some((p) => p.pokemon.name === pokemon.name)
+            );
+            setFilteredPokemons(filtered);
+            setLoading(false);
+        } catch (error) {
+            setError('Error filtering data. Please try again.');
+            setLoading(false);
+        }
+    };
    
 
     const handlePokemonClick = (pokemonName) => {
@@ -80,17 +99,25 @@ export const PokemonInfo = ({ onPokemonClick }) => {
               <img src={image1} alt="background text" className='text-pokemon' />
                   <AudioControls />
                 </div>
-
+               <Navbar  onFilter={filterByType} />
             <h2>Pokemon List</h2>
 
-            <div className="pokemon-container container text-center">
+
+{ loading ? (  
+    <p> Loading ... </p>
+  ) :  error ? ( 
+    <p> Error ... </p>
+  ) :   (   
+
+      
+      <div className="pokemon-container container text-center">
                 <div className="row">
-                    {pokemonList.map((pokemon, index) => (
+                    {filteredPokemons.map((pokemon, index) => (
                         <div class="col-lg-4 col-md-6 col-sm-12" id='hover__pokemon' key={index}>
                             <div className="pokemon-card" >
                                 <img src={pokemon.image} alt={pokemon.name} 
                               
-                                className='pokemon-imagen' />
+                              className='pokemon-imagen' />
                                 
                                 <p className='pokemon-titulo'>
                                     
@@ -105,7 +132,12 @@ export const PokemonInfo = ({ onPokemonClick }) => {
                     ))}
                 </div>
             </div>
-             < Pokedex/>
+                )  }
+
+         
+             < Pokedex />
+         
+             
             <ScrollToTopButton />
         </div>
     );

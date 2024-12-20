@@ -155,9 +155,10 @@ h3 {
 
 
 .pokemon-imagen {
-  width: 100px;
-  height: 100px;
-  margin: 15px 0;
+  object-fit: none;
+  width: 100%;
+  height: 135px;
+  margin: 8px 0;
 }
 
 .pokemon-imagen:hover {
@@ -354,3 +355,33 @@ h3 {
     border-radius: 20px;       /* roundness of the scroll thumb */
     border: 3px solid #454A54;  /* creates padding around scroll thumb */
   }
+
+
+  .navbar {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 20px;
+}
+
+.btn-type {
+    background-color: #f4f4f4;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.btn-type:hover {
+    background-color: #e0e0e0;
+}
+
+.pokemon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
