@@ -97,8 +97,9 @@ export const PokemonInfo = () => {
 
                 <div className='music-player' >
               <img src={image1} alt="background text" className='text-pokemon' />
-                  <AudioControls />
                 </div>
+                  <AudioControls />
+
                <Navbar  onFilter={filterByType} />
             <h2>Pokemon List</h2>
 

@@ -87,7 +87,7 @@ navigate(`/pokemon/${pokemonName}`);
             </div>
         ))}
     </div>
-    <button onClick={handleLoadMore}>Load More</button>
+    <button className='loadMore' onClick={handleLoadMore}>Load More</button>
 </div>
       
     

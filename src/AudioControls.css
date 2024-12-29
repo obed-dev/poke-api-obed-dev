@@ -1,0 +1,50 @@
+.controls-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 300px;
+  margin: auto;
+  margin-bottom: 80px;
+}
+
+.button {
+  background-color: #FFDE00;
+  color: #1a6eb2;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.button:hover {
+  background-color: #1a6eb2;
+  color: #FFDE00;
+}
+
+.volume-slider {
+  width: 50%;
+  margin: 10px 0;
+}
+
+.volume-icon {
+  width: 20px;
+  height: 20px;
+  margin-bottom: 10px;
+}
+
+.song-info {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.progress-slider {
+  width: 100%;
+  margin-top: 10px;
+}
